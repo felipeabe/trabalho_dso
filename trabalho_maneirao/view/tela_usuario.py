@@ -1,7 +1,7 @@
 class TelaUsuario:
 
     def tela_usuario(self):
-        print('------USUÁRIO------')
+        print('--------USUÁRIO--------')
         print('1- Capturar pokemon')
         print('2- Listrar pokemon')
         print('3- Alterar pokemon')
@@ -31,7 +31,7 @@ class TelaUsuario:
                     continue
 
     def menu(self):
-        print('------USUÁRIO------')
+        print('--------USUÁRIO--------')
         print('1- Capturar pokemon')
         print('2- Listrar pokemon')
         print('3- Alterar pokemon')
@@ -42,7 +42,7 @@ class TelaUsuario:
         print('0- Retornar')
 
     def tela_relatorios(self):
-        print('------RELATÓRIOS------')
+        print('--------------RELATÓRIOS--------------')
         print('1- Filtrar por ordem alfabetica')
         print('2- Filtrar por ordem de nivel')
         print('3- Filtrar por regiao')

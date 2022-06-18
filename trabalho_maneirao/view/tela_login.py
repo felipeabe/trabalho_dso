@@ -1,7 +1,7 @@
 class TelaLogin:
 
     def tela_login(self):
-        print('-----TELA DE LOGIN-----')
+        print('-------TELA DE LOGIN-------')
         usuario=self.usuario()
         idpokedex=self.idpokedex()
         return {"usuario": usuario, "idpokedex":idpokedex}

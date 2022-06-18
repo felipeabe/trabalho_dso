@@ -2,7 +2,6 @@ from trabalho_maneirao.view.tela_usuario import TelaUsuario
 from trabalho_maneirao.view.tela_login import TelaLogin
 from trabalho_maneirao.view.tela_pokemon import TelaPokemon
 from trabalho_maneirao.entidade.pokemon import Pokemon
-from trabalho_maneirao.entidade.treinador import Treinador
 from trabalho_maneirao.entidade.pokemon_evoluido import PokemonEvoluido
 from trabalho_maneirao.controladores.controlador_admin import ControleTreinador
 
@@ -15,11 +14,6 @@ class ControladorUsuario():
         self.__tela_login=TelaLogin()
         self.__tela_usuario=TelaUsuario()
         self.__controlador_treinadores=ControleTreinador(self)
-
-
-    # def treinador(self,nome,idpokedex):
-    #     self.__treinador=Treinador(nome,idpokedex)
-    #     return self.__treinador
 
 
     def capturar_pokemon(self):
@@ -42,11 +36,9 @@ class ControladorUsuario():
 
 
     def lista_pokemons(self):
-        if len(self.__controlador_sistema.usuario_logado.lista_pokemons>0):
-            for pokemon in self.__controlador_sistema.usuario_logado.lista_pokemons:
-                self.__tela_pokemon.mostra_pokemon({"nome": pokemon.nome, "tipo": pokemon.tipo,"level": pokemon.level, "ataques": pokemon.ataques, "defesa": pokemon.defesa, "regiao": pokemon.regiao})
-        else:
-            print('Esse treinador ainda não capturou nenhum pokemon')
+        for pokemon in self.__controlador_sistema.usuario_logado.lista_pokemons:
+            self.__tela_pokemon.mostra_pokemon({"nome": pokemon.nome, "tipo": pokemon.tipo,"level": pokemon.level, "ataques": pokemon.ataques, "defesa": pokemon.defesa, "regiao": pokemon.regiao})
+
 
     def alterar_pokemon(self):
         self.lista_pokemons()
@@ -75,12 +67,20 @@ class ControladorUsuario():
 
     def evoluir_pokemon(self):
         nome=self.__tela_pokemon.seleciona_pokemon()
+        sit=False
         for pokemon in self.__controlador_sistema.usuario_logado.lista_pokemons:
             if pokemon.nome==nome:
-                novo_pokemon=PokemonEvoluido(pokemon.nome,pokemon.tipo,pokemon.level,pokemon.ataques,
-                                        pokemon.defesa,pokemon.regiao)
-                self.__controlador_sistema.usuario_logado.lista_pokemons.append(novo_pokemon)
-                self.__controlador_sistema.usuario_logado.lista_pokemons.remove(pokemon)
+                sit=True
+                if pokemon.level>=18:
+                    novo_pokemon=PokemonEvoluido(pokemon.nome,pokemon.tipo,pokemon.level,pokemon.ataques,
+                                            pokemon.defesa,pokemon.regiao)
+                    self.__controlador_sistema.usuario_logado.lista_pokemons.append(novo_pokemon)
+                    self.__controlador_sistema.usuario_logado.lista_pokemons.remove(pokemon)
+                else:
+                    self.__tela_pokemon.mostra_mensagem(f"Para evoluir, o pokemon deve estar no mínimo\n no level 18, e atualmente ele está no level {pokemon.level}")
+        if sit==False:
+            self.__tela_pokemon.mostra_mensagem("Esse pokemon ainda não foi capturado")
+
 
 
     def ver_mochila(self):
@@ -92,6 +92,7 @@ class ControladorUsuario():
                 return pokemon
         return None
 
+
     def relatorios(self):
         self.abre_tela_relatorios()
 
@@ -99,12 +100,14 @@ class ControladorUsuario():
     def retornar(self):
         self.__controlador_sistema.entrar()
 
+
     def abre_tela(self):
-        lista_opcoes = {1: self.capturar_pokemon, 2: self.lista_pokemons,3:self.alterar_pokemon,4:self.excluir_pokemon,5:self.evoluir_pokemon,7:self.relatorios, 0:self.retornar}
+        lista_opcoes = {1: self.capturar_pokemon, 2: self.lista_pokemons,3:self.alterar_pokemon,4:self.excluir_pokemon,5:self.evoluir_pokemon,6:self.ver_mochila,7:self.relatorios, 0:self.retornar}
         continua = True
         while continua:
             opcao_escolhida = lista_opcoes[self.__tela_usuario.tela_usuario()]
             opcao_escolhida()
+
 
     def abre_tela_relatorios(self):
         lista_opcoes = {1: self.listar_ordem_alfabetica,2:self.listar_nivel_crescente,3:self.listar_regiao,0: self.retornar2}

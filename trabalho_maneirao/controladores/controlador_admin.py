@@ -117,6 +117,7 @@ class ControleTreinador:
 
 
 
+
     def transferir_pokemon(self):
         for treinador in self.__treinadores:
             for pokemon in treinador.lista_pokemons:

@@ -2,9 +2,9 @@
 class TelaSistema:
 
     def tela_opcoes(self):
-        print('-----SISTEMA-----')
+        print('-------SISTEMA-------')
         print('1- ENTRAR')
-        print('2-ENCERRAR PROGRAMA')
+        print('2- ENCERRAR PROGRAMA')
 
         opcao=self.opcao()
         return opcao
@@ -27,9 +27,9 @@ class TelaSistema:
 
 
     def menu(self):
-        print('-----SISTEMA-----')
+        print('-------SISTEMA-------')
         print('1- ENTRAR')
-        print('2-ENCERRAR PROGRAMA')
+        print('2- ENCERRAR PROGRAMA')
 
 
 

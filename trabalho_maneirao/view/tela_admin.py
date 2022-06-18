@@ -3,7 +3,7 @@
 class TelaAdmin:
 
     def tela_opcoes(self):
-        print('------ADMIN-------')
+        print('----------------ADMIN----------------')
         print('1- Cadastrar treinador')
         print('2- Alterar treinador')
         print('3- Listar treinador')
@@ -22,6 +22,7 @@ class TelaAdmin:
         return {"nome":nome, "idpokedex":idpokedex}
 
     def mostra_treinador(self, dados_treinador):
+        print('-------------TREINADOR------------- ')
         print("NOME DO TREINADOR: ", dados_treinador["nome"])
         print("IDPOKEDEX DO TREINADOR: ", dados_treinador["idpokedex"])
         print("\n")
@@ -52,7 +53,7 @@ class TelaAdmin:
                     continue
 
     def menu(self):
-        print('------ADMIN-------')
+        print('----------------ADMIN----------------')
         print('1- Cadastrar treinador')
         print('2- Alterar treinador')
         print('3- Listar treinador')
