@@ -102,17 +102,18 @@ class ControleTreinador:
 
     def ver_pokemon_por_nome(self):
         nome=self.__tela_pokemon.nome()
+        sit=False
         for treinador in self.__treinadores:
             for pokemon in treinador.lista_pokemons:
                 if pokemon.nome==nome:
+                    sit=True
                     print("-" * 30)
                     texto=(f'Treinador: {treinador.nome}:{pokemon.nome} ,nível {pokemon.level}')
                     print(texto)
                     break
-            else:
-                texto='Não foram registrados capturas desse pokemon'
-                print(texto)
-                break
+        if sit==False:
+            texto='Não foram registrados capturas desse pokemon'
+            print(texto)
 
 
 
