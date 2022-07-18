@@ -3,21 +3,9 @@ import PySimpleGUI as sg
 class TelaLogin:
     def __init__(self):
         self.__janela=None
-        self.menu()
+
 
     def dados_login(self):
-        self.menu()
-        evento,valores=self.__janela.Read()
-        #NÃO ESTA FUNCIONANDO
-        if evento=='sair' or sg.WIN_CLOSED:
-            self.fechar()
-
-        cadastro={'usuario': valores['usuario'],'idpokedex': valores['idpokedex']}
-        self.fechar()
-        return cadastro
-
-
-    def menu(self):
         layout=[
             [sg.Text('Usuario',size=10),sg.Input(key='usuario')],
             [sg.Text('IDpokedex',size=10),sg.Input(key='idpokedex')],
@@ -25,9 +13,19 @@ class TelaLogin:
         ]
 
         self.__janela=sg.Window('Tela de login').layout(layout)
+        evento,valores=self.abrir()
+        if evento=='sair' or sg.WIN_CLOSED:
+            self.fechar()
+        usuario=valores['usuario']
+        idpokdedex=valores['idpokedex']
+        self.fechar()
+        return{'usuario':usuario,'idpokedex':idpokdedex}
 
 
     def fechar(self):
         self.__janela.Close()
 
 
+    def abrir(self):
+        evento, valores = self.__janela.Read()
+        return evento, valores
