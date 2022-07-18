@@ -8,7 +8,7 @@ class TelaAdmin:
 
     def tela_opcoes(self):
         self.menu()
-        evento,valores=self.janela.Read()
+        evento,valores=self.abrir()
         opcao=0
         if valores['incluir']:
             opcao=1
@@ -17,9 +17,17 @@ class TelaAdmin:
         if valores['alterar']:
             opcao=3
         if valores['listar']:
-            opcao=3
-        if evento=='voltar':
+            opcao=4
+        if valores['pokemons']:
+            opcao=5
+        if valores['itens']:
+            opcao=6
+        if valores['pokemon_nome']:
+            opcao=7
+        if evento==['voltar']:
             opcao=0
+
+
         self.fechar()
         return opcao
 
@@ -45,3 +53,28 @@ class TelaAdmin:
 
     def fechar(self):
         self.janela.Close()
+
+    def dados_treinador(self):
+        layout = [
+            [sg.Text('Dados Treinador')],
+            [sg.Text('Nome',size=12), sg.Input(size=20, key='nome')],
+            [sg.Text('Idpokedex',size=12), sg.Input(size=20, key='idpokedex')],
+            [sg.Button('Continuar', key='continuar'), sg.Button('Voltar', key='voltar')]
+        ]
+
+        self.janela = sg.Window('Tela admin').Layout(layout)
+
+        evento,valores=self.abrir()
+        nome=valores['nome']
+        idpokedex=valores['idpokedex']
+        self.fechar()
+        return {'nome':nome,'idpokedex':idpokedex}
+
+    def mostra_treinador(self,dados_treianador):
+        string_total=" "
+        for dado in dados_treianador:
+            string_total += 'Nome: ' + dado['nome']+'\n'
+            string_total += 'Idpokedex: ' + str(dado['idpokedex']) + '\n'
+
+        sg.Popup('---------LISTA TREINADORES---------',string_total)
+
